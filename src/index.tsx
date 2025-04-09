@@ -2,11 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import timelineItems from "./timelineItems";
 
+import "./index.css";
+
 function App() {
   return (
-    <div>
-      <h2>Good luck with your assignment! {"\u2728"}</h2>
-      <h3>{timelineItems.length} timeline items to render</h3>
+    <div className="p-6 bg-gray-100 min-h-screen">
+      <h2 className="text-2xl font-bold text-blue-600">
+        Good luck with your assignment! ✨
+      </h2>
+      <h3 className="text-lg mt-2">
+        {timelineItems.length} timeline items to render
+      </h3>
     </div>
   );
 }
