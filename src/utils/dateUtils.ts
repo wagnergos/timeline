@@ -7,8 +7,6 @@ dayjs.extend(isSameOrBefore);
 
 import { TimelineItem } from "../types/timeline";
 
-export const DAY_WIDTH = 80;
-
 export function getTimelineBounds(items: TimelineItem[]) {
   const allDates = items.flatMap((item) => [item.start, item.end]);
   const start = dayjs.min(allDates.map(dayjs))!.startOf("day");
@@ -16,7 +14,11 @@ export function getTimelineBounds(items: TimelineItem[]) {
   return { start, end };
 }
 
-export function getItemPosition(item: TimelineItem, timelineStart: Dayjs) {
+export function getItemPosition(
+  item: TimelineItem,
+  timelineStart: Dayjs,
+  dayWidth: number
+) {
   const start = dayjs(item.start).startOf("day");
   const end = dayjs(item.end).startOf("day");
   const base = timelineStart.startOf("day");
@@ -25,8 +27,8 @@ export function getItemPosition(item: TimelineItem, timelineStart: Dayjs) {
   const duration = Math.max(1, end.diff(start, "day") + 1);
 
   return {
-    left: offset * DAY_WIDTH,
-    width: duration * DAY_WIDTH,
+    left: offset * dayWidth,
+    width: duration * dayWidth,
   };
 }
 

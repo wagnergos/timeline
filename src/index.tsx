@@ -5,6 +5,7 @@ import { timelineItems } from "./utils/timelineItems";
 import { getTimelineBounds, generateDateRange } from "./utils/dateUtils";
 import { assignLanes } from "./utils/assignLanes";
 
+import { TimelineProvider } from "./context/TimelineContext";
 import { Timeline } from "./components/Timeline";
 import { TimelineHeader } from "./components/TimelineHeader";
 import { TimelineLane } from "./components/TimelineLane";
@@ -19,20 +20,22 @@ function App() {
   const lanes = assignLanes(timelineItems);
 
   return (
-    <Timeline>
-      <TimelineHeader days={days} />
-      {lanes.map((lane, laneIndex) => (
-        <TimelineLane key={laneIndex}>
-          {lane.map((item) => (
-            <TimelineItem
-              key={item.id}
-              item={item}
-              timelineStart={timelineStart}
-            />
-          ))}
-        </TimelineLane>
-      ))}
-    </Timeline>
+    <TimelineProvider>
+      <Timeline>
+        <TimelineHeader days={days} />
+        {lanes.map((lane, laneIndex) => (
+          <TimelineLane key={laneIndex}>
+            {lane.map((item) => (
+              <TimelineItem
+                key={item.id}
+                item={item}
+                timelineStart={timelineStart}
+              />
+            ))}
+          </TimelineLane>
+        ))}
+      </Timeline>
+    </TimelineProvider>
   );
 }
 

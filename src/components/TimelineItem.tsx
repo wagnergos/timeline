@@ -1,6 +1,8 @@
 import React from "react";
 import dayjs from "dayjs";
 
+import { useTimeline } from "../context/TimelineContext";
+
 import { TimelineItem as ItemType } from "../types/timeline";
 import { getItemPosition } from "../utils/dateUtils";
 
@@ -10,8 +12,10 @@ interface ITimelineItem {
 }
 
 export const TimelineItem = (props: ITimelineItem) => {
+  const { dayWidth } = useTimeline();
+
   const { item, timelineStart } = props;
-  const { left, width } = getItemPosition(item, timelineStart);
+  const { left, width } = getItemPosition(item, timelineStart, dayWidth);
 
   return (
     <div
