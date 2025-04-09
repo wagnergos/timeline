@@ -1,19 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import timelineItems from "./timelineItems";
+
+import { timelineItems } from "./utils/timelineItems";
+
+import { Timeline } from "./components/Timeline";
+import { TimelineHeader } from "./components/TimelineHeader";
+import { TimelineLane } from "./components/TimelineLane";
+import { TimelineItem } from "./components/TimelineItem";
 
 import "./index.css";
 
 function App() {
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <h2 className="text-2xl font-bold text-blue-600">
-        Good luck with your assignment! ✨
-      </h2>
-      <h3 className="text-lg mt-2">
-        {timelineItems.length} timeline items to render
-      </h3>
-    </div>
+    <Timeline>
+      <TimelineHeader />
+      {timelineItems.map((item, index) => (
+        <TimelineLane key={index}>
+          <TimelineItem item={item} />
+        </TimelineLane>
+      ))}
+    </Timeline>
   );
 }
 

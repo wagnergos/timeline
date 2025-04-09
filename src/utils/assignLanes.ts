@@ -1,18 +1,10 @@
-export interface TimelineItem {
-  id: string;
-  title: string;
-  start: string; // formato: YYYY-MM-DD
-  end: string; // formato: YYYY-MM-DD
-  color?: string;
-}
-
-type Lane = TimelineItem[];
+import { TimelineItem } from "../types/timeline";
 
 /**
  * Takes an array of items and assigns them to lanes based on start/end dates.
  * @returns an array of arrays containing items.
  */
-function assignLanes(items: TimelineItem[]): TimelineItem[][] {
+export function assignLanes(items: TimelineItem[]): TimelineItem[][] {
   const sortedItems = items.sort(
     (a, b) => new Date(a.start).getTime() - new Date(b.start).getTime()
   );
