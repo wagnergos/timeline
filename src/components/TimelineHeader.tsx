@@ -1,18 +1,23 @@
 import React from "react";
+import { Dayjs } from "dayjs";
 
-export function TimelineHeader() {
-  const days = Array.from({ length: 14 }, (_, i) => i + 1);
+interface ITimelineHeader {
+  days: Dayjs[];
+}
+export const TimelineHeader = (props: ITimelineHeader) => {
+  const { days } = props;
 
   return (
     <div className="flex border-b text-sm bg-gray-100">
-      {days.map((day) => (
+      {days.map((day, index) => (
         <div
-          key={day}
+          key={index}
           className="w-20 text-center border-r py-2 font-medium text-gray-600"
+          aria-label={`Timeline date ${day.format("MMM D, YYYY")}`}
         >
-          {`Day ${day}`}
+          {day.format("MMM D")}
         </div>
       ))}
     </div>
   );
-}
+};

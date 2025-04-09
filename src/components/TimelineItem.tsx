@@ -1,21 +1,25 @@
 import React from "react";
+import dayjs from "dayjs";
 
 import { TimelineItem as ItemType } from "../types/timeline";
+import { getItemPosition } from "../utils/dateUtils";
 
 interface ITimelineItem {
   item: ItemType;
+  timelineStart: dayjs.Dayjs;
 }
 
-export function TimelineItem({ item }: ITimelineItem) {
+export const TimelineItem = (props: ITimelineItem) => {
+  const { item, timelineStart } = props;
+  const { left, width } = getItemPosition(item, timelineStart);
+
   return (
     <div
       className="absolute top-2 bg-blue-500 text-white text-xs px-2 py-1 rounded shadow"
-      style={{
-        left: "100px",
-        width: "120px",
-      }}
+      style={{ left, width }}
+      aria-label={`${item.name}`}
     >
       {item.name}
     </div>
   );
-}
+};
